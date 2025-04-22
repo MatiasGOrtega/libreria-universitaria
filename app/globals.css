@@ -4,43 +4,43 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-primary: var(--primary);
-  --color-primary-admin: var(--primary-admin);
-  --color-green: var(--green);
-  --color-green-100: var(--green-100);
-  --color-green-400: var(--green-400);
-  --color-green-500: var(--green-500);
-  --color-green-800: var(--green-800);
-  --color-red: var(--red);
-  --color-red-400: var(--red-400);
-  --color-red-500: var(--red-500);
-  --color-red-800: var(--red-800);
-  --color-blue-100: var(--blue-100);
-  --color-light-100: var(--light-100);
-  --color-light-200: var(--light-200);
-  --color-light-300: var(--light-300);
-  --color-light-400: var(--light-400);
-  --color-light-500: var(--light-500);
-  --color-light-600: var(--light-600);
-  --color-light-700: var(--light-700);
-  --color-light-800: var(--light-800);
-  --color-dark-100: var(--dark-100);
-  --color-dark-200: var(--dark-200);
-  --color-dark-300: var(--dark-300);
-  --color-dark-400: var(--dark-400);
-  --color-dark-500: var(--dark-500);
-  --color-dark-600: var(--dark-600);
-  --color-dark-700: var(--dark-700);
-  --color-dark-800: var(--dark-800);
-  --color-gray-100: var(--gray-100);
-  --color-gray-200: var(--gray-200);
-  --color-gray-300: var(--gray-300);
-  --color-gray-400: var(--gray-400);
-  --color-gray-500: var(--gray-500);
-  --color-gray-600: var(--gray-600);
-  --color-gray-700: var(--gray-700);
-  --color-gray-800: var(--gray-800);
-  --color-gray-900: var(--gray-900);
+  --color-primary: #e7c9a5;
+  --color-primary-admin: #25388c;
+  --color-green: #027a48;
+  --color-green-100: #ecfdf3;
+  --color-green-400: #4c7b62;
+  --color-green-500: #2cc171;
+  --color-green-800: #027a48;
+  --color-red: #ef3a4b;
+  --color-red-400: #f46f70;
+  --color-red-500: #e27233;
+  --color-red-800: #ef3a4b;
+  --color-blue-100: #0089f1;
+  --color-light-100: #d6e0ff;
+  --color-light-200: #eed1ac;
+  --color-light-300: #f8f8ff;
+  --color-light-400: #edf1f1;
+  --color-light-500: #8d8d8d;
+  --color-light-600: #f9fafb;
+  --color-light-700: #e2e8f0;
+  --color-light-800: #f8fafc;
+  --color-dark-100: #16191e;
+  --color-dark-200: #3a354e;
+  --color-dark-300: #232839;
+  --color-dark-400: #1e293b;
+  --color-dark-500: #0f172a;
+  --color-dark-600: #333c5c;
+  --color-dark-700: #464f6f;
+  --color-dark-800: #1e2230;
+  --color-gray-100: #cbd5e1;
+  --color-gray-200: #eed1ac;
+  --color-gray-300: #f8f8ff;
+  --color-gray-400: #edf1f1;
+  --color-gray-500: #8d8d8d;
+  --color-gray-600: #f9fafb;
+  --color-gray-700: #e2e8f0;
+  --color-gray-800: #f8fafc;
+  --color-gray-900: #1e2230;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-bebas-neue: var(--bebas-neue);
@@ -82,44 +82,7 @@
 }
 
 :root {
-  --background-image: url('/images/pattern.webp');
-  --color-primary: #E7C9A5;
-  --color-primary-admin: #25388C;
-  --color-green: #027A48;
-  --color-green-100: #ECFDF3;
-  --color-green-400: #4C7B62;
-  --color-green-500: #2CC171;
-  --color-green-800: #027A48;
-  --color-red: #EF3A4B;
-  --color-red-400: #F46F70;
-  --color-red-500: #E27233;
-  --color-red-800: #EF3A4B;
-  --color-blue-100: #0089F1;
-  --color-light-100: #D6E0FF;
-  --color-light-200: #EED1AC;
-  --color-light-300: #F8F8FF;
-  --color-light-400: #EDF1F1;
-  --color-light-500: #8D8D8D;
-  --color-light-600: #F9FAFB;
-  --color-light-700: #E2E8F0;
-  --color-light-800: #F8FAFC;
-  --color-dark-100: #16191E;
-  --color-dark-200: #3A354E;
-  --color-dark-300: #232839;
-  --color-dark-400: #1E293B;
-  --color-dark-500: #0F172A;
-  --color-dark-600: #333C5C;
-  --color-dark-700: #464F6F;
-  --color-dark-800: #1E2230;
-  --color-gray-100: #CBD5E1;
-  --color-gray-200: #EED1AC;
-  --color-gray-300: #F8F8FF;
-  --color-gray-400: #EDF1F1;
-  --color-gray-500: #8D8D8D;
-  --color-gray-600: #F9FAFB;
-  --color-gray-700: #E2E8F0;
-  --color-gray-800: #F8FAFC;
-  --color-gray-900: #1E2230;
+  --background-image: url("/images/pattern.webp");
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
@@ -210,7 +173,6 @@
 }
 
 @layer utilities {
-
   /* Auth */
   .auth-container {
     @apply relative flex flex-col-reverse text-light-100 sm:flex-row;
