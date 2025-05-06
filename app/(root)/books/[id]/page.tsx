@@ -32,12 +32,10 @@ async function Page({ params }: Readonly<{ params: Promise<Book> }>) {
         <div className="flex-[1.5]">
           <section className="flex flex-col gap-7">
             <h3>Video</h3>
-
             <BookVideo videoUrl={bookDetails.videoUrl} />
           </section>
           <section className="mt-10 flex flex-col gap-7">
             <h3>Resumen</h3>
-
             <div className="space-y-5 text-xl text-light-100">
               {bookDetails.summary.split("\n").map((line, i) => (
                 <p key={id+i}>{line}</p>
@@ -47,6 +45,30 @@ async function Page({ params }: Readonly<{ params: Promise<Book> }>) {
         </div>
 
         {/*  SIMILAR*/}
+        <div className="flex-[1.5]">
+          <section className="flex flex-col gap-7">
+            <h3>Libros similares</h3>
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-5">
+                <h4 className="text-2xl font-semibold text-light-100">
+                  Libros de la misma categoría
+                </h4>
+                <div className="flex flex-col gap-5">
+                  {/* <BookList title="Libros de la misma categoría" books={books} /> */}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-5">
+                <h4 className="text-2xl font-semibold text-light-100">
+                  Libros de la misma editorial
+                </h4>
+                <div className="flex flex-col gap-5">
+                  {/* <BookList title="Libros de la misma editorial" books={books} /> */}
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     </>
   );
