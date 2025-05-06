@@ -5,9 +5,13 @@ import { db } from "@/database/drizzle";
 import { books } from "@/database/schema";
 import { eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
-import React from "react";
 
-async function Page({ params }: { params: Promise<{ id: string }> }) {
+interface Book {
+  id: string;
+}
+
+
+async function Page({ params }: Readonly<{ params: Promise<Book> }>) {
   const id = (await params).id;
   const session = await auth();
 
@@ -36,7 +40,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
 
             <div className="space-y-5 text-xl text-light-100">
               {bookDetails.summary.split("\n").map((line, i) => (
-                <p key={i}>{line}</p>
+                <p key={id+i}>{line}</p>
               ))}
             </div>
           </section>
