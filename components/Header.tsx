@@ -18,7 +18,19 @@ function Header({ session }: Readonly<HeaderProps>) {
         <h1 className="text-2xl font-semibold text-white">BookPapulo</h1>
       </Link>
 
-      <ul className="flex gap-8">
+      <ul className="flex items-center gap-8">
+        <li className="flex gap-2">
+          <Link href="/" className="flex flex-row justify-center items-center gap-3">
+            <Image src="/icons/home.svg" alt="logo" width={20} height={20} />
+            <p className="block max-md:hidden font-semibold text-light-200">Inicio</p>
+          </Link>
+        </li>
+        <li className="flex gap-2">
+          <Link href="/search" className="flex flex-row justify-center items-center gap-3">
+            <Image src="/icons/search-fill.svg" alt="book" width={20} height={20} />
+            <p className="block max-md:hidden font-semibold text-light-200">Buscar</p>
+          </Link>
+        </li>
         <li className="flex gap-2">
           <Avatar>
             <AvatarFallback className="bg-amber-100">
@@ -31,7 +43,7 @@ function Header({ session }: Readonly<HeaderProps>) {
             <p className="text-xs text-light-500">{session?.user?.email}</p>
           </div>
         </li>
-        <li className="flex gap-2">
+        <li className="flex gap-2 items-center">
           <form
             action={async () => {
               "use server";
