@@ -13,8 +13,9 @@ interface HeaderProps {
 function Header({ session }: Readonly<HeaderProps>) {
   return (
     <header className="my-10 flex justify-between gap-5">
-      <Link href="/">
-        <Image src="/icons/logo.svg" alt="logo" width={40} height={40} />
+      <Link href="/" className="flex flex-row justify-center items-center gap-3">
+        <Image src="/icons/logo.svg" alt="logo" width={37} height={37} />
+        <h1 className="text-2xl font-semibold text-white">BookPapulo</h1>
       </Link>
 
       <ul className="flex gap-8">
