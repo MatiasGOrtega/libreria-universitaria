@@ -11,15 +11,19 @@ import config from "../config";
 import ratelimit from "../ratelimit";
 import { workflowClient } from "../workflow";
 
+async function rateLimit() {
+  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
+  const { success } = await ratelimit.limit(ip);
+
+  if (!success) return redirect("/too-fast");
+}
+
 export async function signInWithCredentials(
   params: Pick<AuthCredentials, "email" | "password">
 ) {
   const { email, password } = params;
 
-  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
-  const { success } = await ratelimit.limit(ip);
-
-  if (!success) return redirect("/too-fast");
+  // await rateLimit();
 
   try {
     const result = await signIn("credentials", {
@@ -27,6 +31,7 @@ export async function signInWithCredentials(
       password,
       redirect: false,
     });
+    console.log(result, "result");
 
     if (result?.error) {
       return { success: false, error: result.error };
@@ -40,12 +45,17 @@ export async function signInWithCredentials(
 }
 
 export async function signUp(params: AuthCredentials) {
-  const { fullName, email, universityId, password, universityCard } = params;
+  console.log(params, "params");
 
-  const ip = (await headers()).get("x-forwarded-for") || "127.0.0.1";
-  const { success } = await ratelimit.limit(ip);
+  const {
+    fullName,
+    email,
+    universityId,
+    password,
+    // universityCard
+  } = params;
 
-  if (!success) return redirect("/too-fast");
+  // await rateLimit();
 
   const existingUser = await db
     .select()
@@ -65,16 +75,17 @@ export async function signUp(params: AuthCredentials) {
       email,
       universityId,
       password: hashedPassword,
-      universityCard,
+      //cambiar esto por un upload de la universityCard
+      universityCard: "/icons/upload.svg",
     });
 
-    await workflowClient.trigger({
-      url: `${config.env.prodApiEndpoint}/api/workflow/onboarding`,
-      body: {
-        email,
-        fullName,
-      },
-    });
+    // await workflowClient.trigger({
+    //   url: `${process.env.NEXT_PUBLIC_PROD_API_ENDPOINT}/api/workflow/onboarding`,
+    //   body: {
+    //     email,
+    //     fullName,
+    //   },
+    // });
 
     await signInWithCredentials({ email, password });
 

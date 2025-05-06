@@ -32,7 +32,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             <BookVideo videoUrl={bookDetails.videoUrl} />
           </section>
           <section className="mt-10 flex flex-col gap-7">
-            <h3>Summary</h3>
+            <h3>Resumen</h3>
 
             <div className="space-y-5 text-xl text-light-100">
               {bookDetails.summary.split("\n").map((line, i) => (

@@ -19,7 +19,8 @@ interface AuthCredentials {
   email: string;
   password: string;
   universityId: number;
-  universityCard: string;
+  //cambiar a universityCard a string
+  // universityCard: string;
 }
 
 interface BookParams {

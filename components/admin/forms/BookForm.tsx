@@ -173,7 +173,7 @@ function BookForm({ type, ...book }: Props) {
           )}
         />
 
-        <FormField
+        {/* <FormField
           control={form.control}
           name={"coverUrl"}
           render={({ field }) => (
@@ -195,7 +195,7 @@ function BookForm({ type, ...book }: Props) {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         <FormField
           control={form.control}
           name={"coverColor"}

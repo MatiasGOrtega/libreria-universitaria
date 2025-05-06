@@ -33,8 +33,8 @@ async function BookOverview({
     isEligible: availableCopies > 0 && user?.status === "APPROVED",
     message:
       availableCopies <= 0
-        ? "Book is not available"
-        : "You are not eligible to borrow this book",
+        ? "El libro no está disponible"
+        : "No tienes permiso para pedir prestado este libro",
   };
 
   return (
@@ -44,11 +44,11 @@ async function BookOverview({
 
         <div className="book-info">
           <p>
-            By <span className="font-semibold text-light-200">{author}</span>
+            Autor <span className="font-semibold text-light-200">{author}</span>
           </p>
 
           <p>
-            Category{" "}
+            Categoria{" "}
             <span className="font-semibold text-light-200">{genre}</span>
           </p>
 
@@ -60,11 +60,11 @@ async function BookOverview({
 
         <div className="book-copies">
           <p>
-            Total Books <span>{totalCopies}</span>
+            Libros Totales <span>{totalCopies}</span>
           </p>
 
           <p>
-            Available Books <span>{availableCopies}</span>
+            Libros Disponibles <span>{availableCopies}</span>
           </p>
         </div>
 

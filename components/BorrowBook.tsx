@@ -37,8 +37,8 @@ function BorrowBook({
       const result = await borrowBook({ bookId, userId });
 
       if (result.success) {
-        toast.success("Success", {
-          description: "Book borrowed successfully",
+        toast.success("Exito!", {
+          description: "El libro ha sido prestado con éxito",
         });
 
         router.push("/");
@@ -50,7 +50,7 @@ function BorrowBook({
     } catch (error) {
       console.error("Error borrowing book:", error);
       toast.error("Error", {
-        description: "An error occurred while borrowing the book",
+        description: "Hubo un error al intentar pedir prestado el libro",
       });
     } finally {
       setBorrowing(false);
@@ -65,7 +65,7 @@ function BorrowBook({
     >
       <Image src="/icons/book.svg" alt="book" width={20} height={20} />
       <p className="font-bebas-neue text-xl text-dark-100">
-        {borrowing ? "Borrowing ..." : "Borrow Book"}
+        {borrowing ? "Prestando ..." : "Pedir prestado"}
       </p>
     </Button>
   );

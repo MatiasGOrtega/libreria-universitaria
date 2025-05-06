@@ -19,7 +19,7 @@ async function Home() {
       <BookOverview {...latestBooks[0]} userId={session?.user?.id as string} />
 
       <BookList
-        title="Latest Books"
+        title="Ultimos Libros"
         books={latestBooks.slice(1)}
         containerClassName="mt-28"
       />

@@ -11,6 +11,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   },
   providers: [
     CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type:"email" },
+        password: { label: "Password", type: "password" },
+      },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
           return null;
@@ -26,14 +31,20 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           return null;
         }
 
+
         const isPasswordValid = await compare(
           credentials.password.toString(),
           user[0].password
         );
 
+        console.log(isPasswordValid);
+
+
         if (!isPasswordValid) {
           return null;
         }
+
+
 
         return {
           id: user[0].id.toString(),

@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
-import config from "@/lib/config";
 import { IKImage, IKUpload, IKVideo, ImageKitProvider } from "imagekitio-next";
+
 import Image from "next/image";
 import React, { useRef, useState } from "react";
 import { toast } from "sonner";
@@ -9,31 +9,33 @@ import { toast } from "sonner";
 const MAX_IMAGE_SIZE = 20 * 1024 * 1024; // 20MB
 const MAX_VIDEO_SIZE = 50 * 1024 * 1024; // 50MB
 
-const {
-  env: {
-    imagekit: { publicKey, urlEndpoint },
-  },
-} = config;
-
 const authenticator = async () => {
   try {
-    const response = await fetch(`${config.env.apiEndpoint}/api/auth/imagekit`);
-
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/upload-auth`
+    );
     if (!response.ok) {
       const errorText = await response.text();
-
       throw new Error(
         `Request failed with status ${response.status}: ${errorText}`
       );
     }
 
-    const data = await response.json();
+    const text = await response.text();
+    if (!text) {
+      throw new Error("Empty response from server");
+    }
 
-    const { signature, expire, token } = data;
-
-    return { token, expire, signature };
-  } catch (error: any) {
-    throw new Error(`Authentication request failed: ${error.message}`);
+    const data = JSON.parse(text);
+    console.log("Authentication data:", data);
+    return {
+      token: data.token,
+      signature: data.signature,
+      expire: data.expire,
+    };
+  } catch (error) {
+    console.error("Authentication error:", error);
+    throw new Error("Authentication request failed");
   }
 };
 
@@ -60,6 +62,7 @@ function FileUpload({
   const [file, setFile] = useState<{ filePath: string | null }>({
     filePath: value ?? null,
   });
+
   const [progress, setProgress] = useState(0);
 
   const styles = {
@@ -89,6 +92,7 @@ function FileUpload({
   };
 
   const onValidate = (file: File) => {
+    console.log(file);
     if (type === "image") {
       if (file.size > MAX_IMAGE_SIZE) {
         toast.info("File size too large", {
@@ -111,37 +115,30 @@ function FileUpload({
 
   return (
     <ImageKitProvider
-      publicKey={publicKey}
-      urlEndpoint={urlEndpoint}
       authenticator={authenticator}
+      publicKey={process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}
+      urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT}
     >
       <IKUpload
-        ref={ikUploadRef}
-        onError={onError}
-        onSuccess={onSuccess}
-        useUniqueFileName={true}
         validateFile={onValidate}
+        onSuccess={onSuccess}
+        onError={onError}
         onUploadStart={() => setProgress(0)}
         onUploadProgress={({ loaded, total }) => {
           const percent = Math.round((loaded / total) * 100);
-
           setProgress(percent);
         }}
         folder={folder}
         accept={accept}
-        className="hidden"
+        style={{
+          display: "none",
+        }}
+        ref={ikUploadRef}
       />
 
       <button
         className={cn("upload-btn", styles.button)}
-        onClick={(e) => {
-          e.preventDefault();
-
-          if (ikUploadRef.current) {
-            // @ts-ignore
-            ikUploadRef.current?.click();
-          }
-        }}
+        onClick={() => ikUploadRef.current.click()}
       >
         <Image
           src="/icons/upload.svg"
