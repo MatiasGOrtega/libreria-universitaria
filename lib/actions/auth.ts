@@ -71,9 +71,9 @@ export async function signUp(params: AuthCredentials) {
 
   try {
     await db.insert(users).values({
-      fullName,
-      email,
-      universityId,
+      fullName: fullName,
+      email: email,
+      universityId: universityId,
       password: hashedPassword,
       //cambiar esto por un upload de la universityCard
       universityCard: "/icons/upload.svg",
