@@ -7,8 +7,8 @@ interface Props {
   containerClassName?: string;
 }
 
-function BookList({ title, books, containerClassName }: Props) {
-  if (books.length < 2) return;
+function BookList({ title, books, containerClassName }: Readonly<Props>) {
+  if (books.length <= 0) return;
 
   return (
     <section className={containerClassName}>
