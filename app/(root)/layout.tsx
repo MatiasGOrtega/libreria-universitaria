@@ -7,7 +7,7 @@ import { db } from "@/database/drizzle";
 import { users } from "@/database/schema";
 import { eq } from "drizzle-orm";
 
-async function Layout({ children }: { children: React.ReactNode }) {
+async function Layout({ children }: Readonly<{ children: React.ReactNode }>) {
   const session = await auth();
 
   if (!session) {
